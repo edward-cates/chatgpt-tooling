@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class BasicResponse(BaseModel):
     """
     A class for a simple string response from the LLM.
     """
-    response: str
+    response: str = Field(description="A text response from the LLM.")

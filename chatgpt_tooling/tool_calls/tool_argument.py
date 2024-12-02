@@ -7,7 +7,7 @@ class ToolArgument(BaseModel):
     name: str = Field(description="The name of the argument.")
     description: str = Field(description="A description of the argument.")
     type: str = Field(description="The type of the argument (e.g. `str`, `int`, `float`, `list[str]`).")
-    enum: list[str] | None = Field(description="An optional list of allowed values for the argument.")
+    enum: list[str] | None = Field(description="An optional list of allowed values for the argument (e.g. `['yes', 'no']`).")
 
     def render(self) -> dict:
         if "list" in self.type:
@@ -15,7 +15,7 @@ class ToolArgument(BaseModel):
         if "dict" in self.type:
             raise NotImplementedError(f"Dict types not yet supported.")
         to_return = {
-            "type": self.type,
+            "type": self._transform_python_type_to_openai_type(self.type),
             "description": self.description,
         }
         if self.enum:

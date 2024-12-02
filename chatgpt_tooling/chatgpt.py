@@ -5,7 +5,7 @@ from openai import OpenAI
 
 from .structured_output.basic_response import BasicResponse
 from .tool_calls.tool import Tool
-from .prompt import Prompt
+from .prompt.prompt import Prompt
 
 class ChatGPT:
     """

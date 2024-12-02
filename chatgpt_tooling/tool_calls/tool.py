@@ -1,7 +1,7 @@
 from abc import ABC
 import traceback
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from .tool_descriptor import ToolDescriptor
 from .tool_argument import ToolArgument
@@ -27,8 +27,7 @@ class Tool(BaseModel, ABC):
     When the LLM responds with tool calls (aka function names and arguments), the
     `call` method is used to call that method.
     """
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     @property
     def tool_descriptors(self) -> list[ToolDescriptor]:
